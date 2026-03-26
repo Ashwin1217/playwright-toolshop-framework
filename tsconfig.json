@@ -20,13 +20,6 @@
       "@test-data/*": ["test-data/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "config/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*", "tests/**/*", "config/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
