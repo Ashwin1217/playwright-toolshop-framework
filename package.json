@@ -1,0 +1,15 @@
+{
+  "name": "playwright-automation_aswin",
+  "version": "1.0.0",
+  "description": "Enterprise-level Playwright test automation framework for Practice Software Testing - Toolshop v5.0",
+  "author": "Aswin",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  }
+}
