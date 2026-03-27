@@ -31,3 +31,6 @@ Thumbs.db
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Playwright auth state files (contain session tokens)
+.auth/

@@ -35,6 +35,9 @@ export default defineConfig({
     // Base URL from environment config
     baseURL: process.env['BASE_URL'],
 
+    // Tell Playwright which attribute getByTestId() should look for
+    testIdAttribute: 'data-test',
+
     // Collect trace on first retry for debugging
     trace: 'on-first-retry',
 
