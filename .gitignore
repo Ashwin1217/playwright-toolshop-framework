@@ -34,3 +34,8 @@ Thumbs.db
 
 # Playwright auth state files (contain session tokens)
 .auth/
+
+# Environment files with credentials
+config/environments/dev.env
+config/environments/staging.env
+config/environments/prod.env
