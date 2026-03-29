@@ -1,10 +1,12 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { NavigationComponent } from '../components/NavigationComponent';
+import { ToastComponent } from '../components/ToastComponent';
 
 export class ProductPage extends BasePage {
   // ─── Components ────────────────────────────────────────────────
   public readonly nav: NavigationComponent;
+  public readonly toast: ToastComponent;
 
   // ─── Locators ──────────────────────────────────────────────────
   private readonly productName: Locator;
@@ -17,10 +19,11 @@ export class ProductPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.nav = new NavigationComponent(page);
+    this.toast = new ToastComponent(page);
     this.productName = page.getByTestId('product-name');
     this.productPrice = page.getByTestId('unit-price');
     this.productDescription = page.getByTestId('product-description');
-    this.productImage = page.locator('img[src*="assets/img/products/"]');
+    this.productImage = page.locator('figure img[src*="assets/img/products/"]');
     this.quantityInput = page.getByTestId('quantity');
     this.addToCartButton = page.getByTestId('add-to-cart');
   }

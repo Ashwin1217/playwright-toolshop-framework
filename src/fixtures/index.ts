@@ -4,6 +4,7 @@ import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
 import { NavigationComponent } from '../components/NavigationComponent';
+import { ToastComponent } from '../components/ToastComponent';
 import { AuthApiClient } from '../api/AuthApiClient';
 import { ProductsApiClient } from '../api/ProductsApiClient';
 
@@ -15,6 +16,7 @@ type PageFixtures = {
   productPage: ProductPage;
   cartPage: CartPage;
   nav: NavigationComponent;
+  toast: ToastComponent;
 };
 
 type ApiFixtures = {
@@ -44,6 +46,10 @@ export const test = base.extend<PageFixtures & ApiFixtures>({
 
   nav: async ({ page }, use) => {
     await use(new NavigationComponent(page));
+  },
+
+  toast: async ({ page }, use) => {
+    await use(new ToastComponent(page));
   },
 
   // API Client fixtures
