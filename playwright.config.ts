@@ -76,13 +76,25 @@ export default defineConfig({
       testMatch: '**/global.setup.ts',
     },
 
+    // --- Teardown project (runs after all tests) ---
+    {
+      name: 'teardown',
+      testMatch: '**/global.teardown.ts',
+    },
+
     // --- Desktop Browsers ---
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        viewport: null, // ← overrides device viewport
+        deviceScaleFactor: undefined, // ← overrides device scale factor
+        launchOptions: {
+          args: ['--start-maximized'], // ← overrides device launchOptions
+        },
       },
       dependencies: ['setup'],
+      teardown: 'teardown',
     },
     {
       name: 'firefox',
@@ -90,6 +102,7 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
       },
       dependencies: ['setup'],
+      teardown: 'teardown',
     },
     {
       name: 'webkit',
@@ -97,6 +110,7 @@ export default defineConfig({
         ...devices['Desktop Safari'],
       },
       dependencies: ['setup'],
+      teardown: 'teardown',
     },
 
     // --- Mobile Browsers ---
@@ -106,6 +120,7 @@ export default defineConfig({
         ...devices['Pixel 5'],
       },
       dependencies: ['setup'],
+      teardown: 'teardown',
     },
     {
       name: 'mobile-safari',
@@ -113,6 +128,7 @@ export default defineConfig({
         ...devices['iPhone 13'],
       },
       dependencies: ['setup'],
+      teardown: 'teardown',
     },
 
     // --- API Testing (no browser needed) ---

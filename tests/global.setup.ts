@@ -23,7 +23,7 @@ setup('authenticate as regular user', async ({ page }) => {
   await page.getByTestId('login-submit').click();
 
   // Wait for successful login - verify we're on the home page
-  await expect(page).toHaveURL('/');
+  await expect(page).toHaveURL('/account');
 
   // Save authenticated browser state to file
   await page.context().storageState({ path: USER_AUTH_FILE });
@@ -41,8 +41,8 @@ setup('authenticate as admin user', async ({ page }) => {
   // Submit login form
   await page.getByTestId('login-submit').click();
 
-  // Wait for successful admin login
-  await expect(page).toHaveURL('/');
+  // Wait for successful admin logins
+  await expect(page).toHaveURL('/admin/dashboard');
 
   // Save admin authenticated browser state to file
   await page.context().storageState({ path: ADMIN_AUTH_FILE });

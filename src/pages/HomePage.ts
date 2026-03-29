@@ -7,13 +7,17 @@ export class HomePage extends BasePage {
   private readonly searchButton: Locator;
   private readonly sortDropdown: Locator;
   private readonly productCards: Locator;
+  private readonly searchCompletedProductCards: Locator;
+  private readonly sortingCompletedProductCards: Locator;
 
   constructor(page: Page) {
     super(page);
     this.searchInput = page.getByTestId('search-query');
     this.searchButton = page.getByTestId('search-submit');
     this.sortDropdown = page.getByTestId('sort');
-    this.productCards = page.locator('[data-test^="product-"]');
+    this.searchCompletedProductCards = page.getByTestId('search_completed');
+    this.sortingCompletedProductCards = page.getByTestId('sorting_completed');
+    this.productCards = page.locator('a[data-test^="product-"]');
   }
 
   // ─── Navigation ────────────────────────────────────────────────
@@ -28,7 +32,7 @@ export class HomePage extends BasePage {
   async searchForProduct(searchTerm: string): Promise<void> {
     await this.fillInput(this.searchInput, searchTerm);
     await this.clickElement(this.searchButton);
-    await this.waitForPageLoad();
+    await this.waitForVisible(this.searchCompletedProductCards);
   }
 
   async clearSearch(): Promise<void> {
@@ -45,7 +49,7 @@ export class HomePage extends BasePage {
 
   async sortBy(option: string): Promise<void> {
     await this.sortDropdown.selectOption(option);
-    await this.waitForPageLoad();
+    await this.waitForVisible(this.sortingCompletedProductCards);
   }
 
   // ─── Product Cards ─────────────────────────────────────────────
@@ -74,7 +78,7 @@ export class HomePage extends BasePage {
   }
 
   async clickProductByName(name: string): Promise<void> {
-    await this.page.locator('[data-test^="product-"]').filter({ hasText: name }).first().click();
+    await this.page.locator('[data-test="product-name"]').filter({ hasText: name }).first().click();
     await this.waitForPageLoad();
   }
 
