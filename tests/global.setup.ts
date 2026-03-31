@@ -1,4 +1,5 @@
 import { test as setup, expect } from '@playwright/test';
+import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -6,9 +7,15 @@ import dotenv from 'dotenv';
 const env = process.env['ENV'] || 'dev';
 dotenv.config({ path: path.resolve(__dirname, `../config/environments/${env}.env`) });
 
+// Ensure auth storage directory exists
+const authDir = path.join(__dirname, '../.auth');
+if (!fs.existsSync(authDir)) {
+  fs.mkdirSync(authDir, { recursive: true });
+}
+
 // Path where authenticated state will be saved
-export const USER_AUTH_FILE = path.join(__dirname, '../.auth/user.json');
-export const ADMIN_AUTH_FILE = path.join(__dirname, '../.auth/admin.json');
+export const USER_AUTH_FILE = path.join(authDir, 'user.json');
+export const ADMIN_AUTH_FILE = path.join(authDir, 'admin.json');
 
 // Regular user authentication setup
 setup('authenticate as regular user', async ({ page }) => {

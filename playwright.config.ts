@@ -49,12 +49,16 @@ export default defineConfig({
 
     // Browser context options
     ignoreHTTPSErrors: true,
+    viewport: { width: 1920, height: 1080 },
 
     // Default timeout for actions
     actionTimeout: 15000,
 
     // Default timeout for navigation
     navigationTimeout: 30000,
+
+    // Use authenticated browser state saved by global setup
+    storageState: path.resolve(__dirname, '.auth/user.json'),
   },
 
   // Global test timeout
@@ -76,25 +80,18 @@ export default defineConfig({
       testMatch: '**/global.setup.ts',
     },
 
-    // --- Teardown project (runs after all tests) ---
-    {
-      name: 'teardown',
-      testMatch: '**/global.teardown.ts',
-    },
-
     // --- Desktop Browsers ---
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        viewport: null, // ← overrides device viewport
-        deviceScaleFactor: undefined, // ← overrides device scale factor
+        viewport: { width: 1920, height: 1080 },
+        deviceScaleFactor: undefined,
         launchOptions: {
-          args: ['--start-maximized'], // ← overrides device launchOptions
+          args: ['--window-size=1920,1080'],
         },
       },
       dependencies: ['setup'],
-      teardown: 'teardown',
     },
     {
       name: 'firefox',
@@ -102,7 +99,6 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
       },
       dependencies: ['setup'],
-      teardown: 'teardown',
     },
     {
       name: 'webkit',
@@ -110,7 +106,6 @@ export default defineConfig({
         ...devices['Desktop Safari'],
       },
       dependencies: ['setup'],
-      teardown: 'teardown',
     },
 
     // --- Mobile Browsers ---
@@ -120,7 +115,6 @@ export default defineConfig({
         ...devices['Pixel 5'],
       },
       dependencies: ['setup'],
-      teardown: 'teardown',
     },
     {
       name: 'mobile-safari',
@@ -128,7 +122,6 @@ export default defineConfig({
         ...devices['iPhone 13'],
       },
       dependencies: ['setup'],
-      teardown: 'teardown',
     },
 
     // --- API Testing (no browser needed) ---
