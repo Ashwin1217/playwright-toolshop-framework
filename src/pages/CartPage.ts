@@ -1,22 +1,35 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { NavigationComponent } from '../components/NavigationComponent';
+import { ToastComponent } from '../components/ToastComponent';
 
 export class CartPage extends BasePage {
   // ─── Components ────────────────────────────────────────────────
   public readonly nav: NavigationComponent;
+  public readonly toast: ToastComponent;
 
   // ─── Page Level Locators ───────────────────────────────────────
   private readonly cartRows: Locator;
   private readonly cartTotal: Locator;
   private readonly proceedToCheckoutButton: Locator;
+  private readonly emptyCartMessage: Locator;
+  private readonly currentStageIsCart: Locator;
+  private readonly cartQuantity: Locator;
 
   constructor(page: Page) {
     super(page);
     this.nav = new NavigationComponent(page);
-    this.cartRows = page.locator('tbody tr');
+    this.toast = new ToastComponent(page);
     this.cartTotal = page.getByTestId('cart-total');
+    this.cartQuantity = page.getByTestId('cart-quantity');
     this.proceedToCheckoutButton = page.getByTestId('proceed-1');
+    this.cartRows = page.locator('tbody tr');
+    this.currentStageIsCart = page.locator('li.current', {
+      hasText: 'Cart',
+    });
+    this.emptyCartMessage = page.locator('p.ng-star-inserted', {
+      hasText: 'The cart is empty',
+    });
   }
 
   // ─── Child Locators (scoped to a cart row) ─────────────────────
@@ -47,7 +60,7 @@ export class CartPage extends BasePage {
   // ─── Getters ───────────────────────────────────────────────────
 
   async getCartItemCount(): Promise<number> {
-    return this.cartRows.count();
+    return parseInt(await this.cartQuantity.innerText());
   }
 
   async getCartTotal(): Promise<string> {
@@ -73,7 +86,12 @@ export class CartPage extends BasePage {
 
   async updateItemQuantity(index: number, quantity: number): Promise<void> {
     const row = this.cartRows.nth(index);
-    await this.fillInput(this.productQuantity(row), quantity.toString());
+    const input = this.productQuantity(row);
+    await input.waitFor({ state: 'visible' });
+    await input.click({ clickCount: 3 }); // select all text
+    await input.fill(quantity.toString());
+    await input.blur(); // trigger update event
+    await this.waitForPageLoad();
   }
 
   async removeItemByIndex(index: number): Promise<void> {
@@ -97,11 +115,19 @@ export class CartPage extends BasePage {
     await this.waitForPageLoad();
   }
 
+  async removeAllItems(): Promise<void> {
+    const count = await this.getCartItemCount();
+    for (let i = count - 1; i >= 0; i--) {
+      await this.removeItemByIndex(0);
+      await this.toast.assertProductDeleted();
+    }
+  }
+
   // ─── Assertions ────────────────────────────────────────────────
 
   async assertCartPageLoaded(): Promise<void> {
     await this.assertUrl('/checkout');
-    await this.assertElementVisible(this.proceedToCheckoutButton);
+    await this.assertElementVisible(this.currentStageIsCart);
   }
 
   async assertCartItemCount(expectedCount: number): Promise<void> {
@@ -134,9 +160,6 @@ export class CartPage extends BasePage {
   }
 
   async assertCartIsEmpty(): Promise<void> {
-    const count = await this.getCartItemCount();
-    if (count !== 0) {
-      throw new Error(`Expected cart to be empty but found ${count} items`);
-    }
+    await this.assertElementVisible(this.emptyCartMessage);
   }
 }

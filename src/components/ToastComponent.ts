@@ -35,8 +35,11 @@ export class ToastComponent {
   }
 
   async assertSuccessMessage(expectedText: string): Promise<void> {
-    await this.successToast.waitFor({ state: 'visible' });
-    await expect(this.successToast).toContainText(expectedText);
+    const specificToast = this.page.locator('.toast-success', {
+      hasText: expectedText,
+    });
+    await specificToast.waitFor({ state: 'visible' });
+    await expect(specificToast).toBeVisible();
   }
 
   async assertErrorMessage(expectedText: string): Promise<void> {
@@ -46,5 +49,17 @@ export class ToastComponent {
 
   async assertToastHidden(): Promise<void> {
     await expect(this.successToast).toBeHidden();
+  }
+
+  async assertProductDeleted(): Promise<void> {
+    await this.assertSuccessMessage('Product deleted');
+  }
+
+  async assertQuantityUpdated(): Promise<void> {
+    await this.assertSuccessMessage('Product quantity updated');
+  }
+
+  async assertProductAddedToCart(): Promise<void> {
+    await this.assertSuccessMessage('Product added to shopping cart');
   }
 }

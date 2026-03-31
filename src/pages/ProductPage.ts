@@ -75,6 +75,7 @@ export class ProductPage extends BasePage {
     await this.assertElementVisible(this.productName);
     await this.assertElementVisible(this.productPrice);
     await this.assertElementVisible(this.addToCartButton);
+    await this.waitForVisible(this.addToCartButton);
   }
 
   async assertProductName(expectedName: string): Promise<void> {

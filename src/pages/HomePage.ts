@@ -25,6 +25,7 @@ export class HomePage extends BasePage {
   async navigate(): Promise<void> {
     await this.navigateTo('/');
     await this.waitForPageLoad();
+    await this.productCards.first().waitFor({ state: 'visible' });
   }
 
   // ─── Search ────────────────────────────────────────────────────
