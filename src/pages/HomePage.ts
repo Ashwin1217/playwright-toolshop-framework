@@ -86,7 +86,6 @@ export class HomePage extends BasePage {
   // ─── Assertions ────────────────────────────────────────────────
 
   async assertHomePageLoaded(): Promise<void> {
-    //await this.assertUrl('/');
     await this.assertElementVisible(this.searchInput);
     await this.assertElementVisible(this.searchButton);
   }
