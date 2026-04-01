@@ -1,6 +1,9 @@
 import { test } from '../../src/fixtures/index';
 
 test.describe('Authentication', () => {
+  // Override storageState — auth tests must start logged out
+  test.use({ storageState: { cookies: [], origins: [] } });
+
   test.describe('Login', () => {
     test('should login successfully with valid credentials @smoke', async ({ loginPage, nav }) => {
       // Arrange

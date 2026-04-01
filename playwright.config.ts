@@ -56,9 +56,6 @@ export default defineConfig({
 
     // Default timeout for navigation
     navigationTimeout: 30000,
-
-    // Use authenticated browser state saved by global setup
-    storageState: path.resolve(__dirname, '.auth/user.json'),
   },
 
   // Global test timeout
@@ -83,6 +80,7 @@ export default defineConfig({
     // --- Desktop Browsers ---
     {
       name: 'chromium',
+      testMatch: ['**/e2e/**/*.spec.ts', '**/visual/**/*.spec.ts'],
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
@@ -90,36 +88,23 @@ export default defineConfig({
         launchOptions: {
           args: ['--window-size=1920,1080'],
         },
-      },
-      dependencies: ['setup'],
-    },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-      dependencies: ['setup'],
-    },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
+        storageState: path.resolve(__dirname, '.auth/user.json'),
       },
       dependencies: ['setup'],
     },
 
-    // --- Mobile Browsers ---
+    // Admin tests — uses admin.json
     {
-      name: 'mobile-chrome',
+      name: 'chromium-admin',
+      testMatch: ['**/e2e/admin/**/*.spec.ts'],
       use: {
-        ...devices['Pixel 5'],
-      },
-      dependencies: ['setup'],
-    },
-    {
-      name: 'mobile-safari',
-      use: {
-        ...devices['iPhone 13'],
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        deviceScaleFactor: undefined,
+        launchOptions: {
+          args: ['--window-size=1920,1080'],
+        },
+        storageState: path.resolve(__dirname, '.auth/admin.json'),
       },
       dependencies: ['setup'],
     },
@@ -131,6 +116,26 @@ export default defineConfig({
       use: {
         baseURL: process.env['API_BASE_URL'],
       },
+    },
+
+    // --- Mobile Browsers ---
+    {
+      name: 'mobile-chrome',
+      testMatch: ['**/e2e/**/*.spec.ts', '**/visual/**/*.spec.ts'],
+      use: {
+        ...devices['Pixel 5'],
+        storageState: path.resolve(__dirname, '.auth/user.json'),
+      },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'mobile-safari',
+      testMatch: ['**/e2e/**/*.spec.ts', '**/visual/**/*.spec.ts'],
+      use: {
+        ...devices['iPhone 13'],
+        storageState: path.resolve(__dirname, '.auth/user.json'),
+      },
+      dependencies: ['setup'],
     },
   ],
 });
