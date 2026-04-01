@@ -17,6 +17,10 @@ if (!fs.existsSync(authDir)) {
 export const USER_AUTH_FILE = path.join(authDir, 'user.json');
 export const ADMIN_AUTH_FILE = path.join(authDir, 'admin.json');
 
+//Base URL Validation in CI environment
+const baseUrl = process.env.BASE_URL;
+if (!baseUrl) throw new Error('BASE_URL is missing in CI');
+
 // Regular user authentication setup
 setup('authenticate as regular user', async ({ page }) => {
   // Navigate to login page
