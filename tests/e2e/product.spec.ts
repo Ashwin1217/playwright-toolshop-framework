@@ -1,8 +1,15 @@
 import { test, expect } from '../../src/fixtures/index';
+import * as allure from 'allure-js-commons';
 
 test.describe('Product Page', () => {
   test.describe('Product Details', () => {
     test('should display product details correctly @smoke', async ({ homePage, productPage }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Product Details');
+      await allure.story('Display Product Details Correctly');
+      await allure.severity('critical');
+
       // Arrange
       const productName = 'Bolt Cutters';
 
@@ -18,6 +25,12 @@ test.describe('Product Page', () => {
     });
 
     test('should display product price @smoke', async ({ homePage, productPage }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Product Details');
+      await allure.story('Display Product Price Correctly');
+      await allure.severity('critical');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -29,6 +42,12 @@ test.describe('Product Page', () => {
     });
 
     test('should display product description @regression', async ({ homePage, productPage }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Product Details');
+      await allure.story('Display Product Description Correctly');
+      await allure.severity('normal');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -45,6 +64,12 @@ test.describe('Product Page', () => {
       homePage,
       productPage,
     }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Add to Cart');
+      await allure.story('Show Success Toast After Adding Product to Cart');
+      await allure.severity('critical');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -59,6 +84,12 @@ test.describe('Product Page', () => {
       homePage,
       productPage,
     }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Add to Cart');
+      await allure.story('Add Product to Cart with Default Quantity');
+      await allure.severity('minor');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -79,6 +110,12 @@ test.describe('Product Page', () => {
       homePage,
       productPage,
     }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Add to Cart');
+      await allure.story('Add Product to Cart with Custom Quantity');
+      await allure.severity('normal');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -95,6 +132,12 @@ test.describe('Product Page', () => {
       homePage,
       productPage,
     }) => {
+      // Allure
+      await allure.epic('Product Page');
+      await allure.feature('Navigation Bar');
+      await allure.story('Navigate Back to Home');
+      await allure.severity('minor');
+
       // Act
       await homePage.navigate();
       await homePage.clickProductByIndex(0);

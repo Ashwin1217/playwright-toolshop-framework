@@ -39,3 +39,7 @@ Thumbs.db
 config/environments/dev.env
 config/environments/staging.env
 config/environments/prod.env
+
+# Allure
+allure-results/
+allure-report/

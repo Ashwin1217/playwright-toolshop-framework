@@ -10,7 +10,7 @@ export class NavigationComponent {
   private readonly cartIcon: Locator;
   private readonly accountMenu: Locator;
   private readonly categoriesMenu: Locator;
-  private readonly pageTitle: Locator;
+  //private readonly pageTitle: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,7 +19,7 @@ export class NavigationComponent {
     this.cartIcon = page.getByTestId('nav-cart');
     this.accountMenu = page.getByTestId('nav-menu');
     this.categoriesMenu = page.getByTestId('nav-categories');
-    this.pageTitle = page.getByTestId('page-title');
+    //this.pageTitle = page.getByTestId('page-title');
   }
 
   // ─── Navigation Actions ────────────────────────────────────────
@@ -67,7 +67,7 @@ export class NavigationComponent {
   // ─── Assertions ────────────────────────────────────────────────
 
   async assertUserIsLoggedIn(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible();
+    await expect(this.accountMenu).toBeVisible();
     await expect(this.signInLink).toBeHidden();
   }
 

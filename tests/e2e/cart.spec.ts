@@ -1,4 +1,5 @@
 import { test, expect } from '../../src/fixtures/index';
+import * as allure from 'allure-js-commons';
 
 test.describe('Cart Page', () => {
   test.describe('Cart Items', () => {
@@ -7,6 +8,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Display Added Products in Cart');
+      await allure.severity('critical');
+
       // Arrange — add a product via UI
       const productName = 'Bolt Cutters';
       await homePage.navigate();
@@ -32,6 +39,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Display Correct Cart Item Count');
+      await allure.severity('normal');
+
       // Arrange — add two DIFFERENT named products
       await homePage.navigate();
       await homePage.clickProductByName('Bolt Cutters');
@@ -57,6 +70,12 @@ test.describe('Cart Page', () => {
     });
 
     test('should display cart total @smoke', async ({ homePage, productPage, cartPage }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Display Correct Cart Total');
+      await allure.severity('normal');
+
       // Arrange
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -78,6 +97,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Remove Item from Cart by Name');
+      await allure.severity('normal');
+
       // Arrange
       const productName = 'Bolt Cutters';
       await homePage.navigate();
@@ -100,6 +125,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Show Empty Cart Message After Removing All Items');
+      await allure.severity('normal');
+
       // Arrange
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -120,6 +151,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Update Item Quantity in Cart');
+      await allure.severity('normal');
+
       // Arrange
       await homePage.navigate();
       await homePage.clickProductByIndex(0);
@@ -147,6 +184,12 @@ test.describe('Cart Page', () => {
       productPage,
       cartPage,
     }) => {
+      // Allure
+      await allure.epic('Cart Page');
+      await allure.feature('Cart Items');
+      await allure.story('Proceed to Checkout When Logged In');
+      await allure.severity('normal');
+
       // Arrange
       await homePage.navigate();
       await homePage.clickProductByIndex(0);

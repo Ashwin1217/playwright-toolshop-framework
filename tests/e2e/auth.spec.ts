@@ -1,4 +1,5 @@
 import { test } from '../../src/fixtures/index';
+import * as allure from 'allure-js-commons';
 
 test.describe('Authentication', () => {
   // Override storageState — auth tests must start logged out
@@ -6,6 +7,12 @@ test.describe('Authentication', () => {
 
   test.describe('Login', () => {
     test('should login successfully with valid credentials @smoke', async ({ loginPage, nav }) => {
+      // Allure
+      await allure.epic('Authentication');
+      await allure.feature('Login');
+      await allure.story('Valid Login');
+      await allure.severity('critical');
+
       // Arrange
       const email = process.env['TEST_USER_EMAIL'] ?? '';
       const password = process.env['TEST_USER_PASSWORD'] ?? '';
@@ -21,6 +28,11 @@ test.describe('Authentication', () => {
     test('should show error message with invalid credentials @regression', async ({
       loginPage,
     }) => {
+      // Allure
+      await allure.epic('Authentication');
+      await allure.feature('Login');
+      await allure.story('Invalid Login');
+      await allure.severity('normal');
       // Arrange
       const invalidEmail = 'invalid@test.com';
       const invalidPassword = 'wrongpassword';
@@ -36,6 +48,12 @@ test.describe('Authentication', () => {
     test('should show error with valid email but wrong password @regression', async ({
       loginPage,
     }) => {
+      // Allure
+      await allure.epic('Authentication');
+      await allure.feature('Login');
+      await allure.story('Wrong Password');
+      await allure.severity('normal');
+
       // Arrange
       const email = process.env['TEST_USER_EMAIL'] ?? '';
       const wrongPassword = 'wrongpassword123';
@@ -49,6 +67,12 @@ test.describe('Authentication', () => {
     });
 
     test('should display login form elements correctly @smoke', async ({ loginPage }) => {
+      // Allure
+      await allure.epic('Authentication');
+      await allure.feature('Login');
+      await allure.story('Login Form');
+      await allure.severity('minor');
+
       // Act
       await loginPage.navigate();
 

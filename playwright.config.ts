@@ -28,6 +28,20 @@ export default defineConfig({
     ['json', { outputFile: 'reports/json/results.json' }],
     ['junit', { outputFile: 'reports/junit/results.xml' }],
     ['list'],
+    [
+      'allure-playwright',
+      {
+        outputFolder: 'allure-results',
+        suiteTitle: false,
+        detail: true,
+        links: {
+          issue: {
+            nameTemplate: 'Issue #%s',
+            urlTemplate: 'https://github.com/Ashwin1217/playwright-toolshop-framework/issues/%s',
+          },
+        },
+      },
+    ],
   ],
 
   // Global test settings
