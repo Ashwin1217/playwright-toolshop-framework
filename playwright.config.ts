@@ -99,9 +99,18 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
         deviceScaleFactor: undefined,
-        launchOptions: {
-          args: ['--window-size=1920,1080'],
+        extraHTTPHeaders: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         },
+        launchOptions: {
+          args: [
+            '--window-size=1920,1080',
+            '--disable-blink-features=AutomationControlled',
+            '--no-sandbox',
+          ],
+        },
+
         storageState: path.resolve(__dirname, '.auth/user.json'),
       },
       dependencies: ['setup'],
