@@ -116,6 +116,9 @@ jobs:
         continue-on-error: true
         run: npx playwright test --project=chromium
 
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline
+
       - name: Generate Allure report
         if: always()
         run: npm run allure:generate
