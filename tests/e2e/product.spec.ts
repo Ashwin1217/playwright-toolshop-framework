@@ -63,6 +63,7 @@ test.describe('Product Page', () => {
     test('should show success toast after adding product to cart @smoke', async ({
       homePage,
       productPage,
+      cartPage,
     }) => {
       // Allure
       await allure.epic('Product Page');
@@ -77,12 +78,14 @@ test.describe('Product Page', () => {
       await productPage.addToCart();
 
       // Assert
-      await productPage.toast.assertSuccessMessage('Product added to shopping cart');
+      await productPage.toast.assertProductAddedToCart();
+      await cartPage.assertCartItemCount(1);
     });
 
     test('should add product to cart with default quantity @regression', async ({
       homePage,
       productPage,
+      cartPage,
     }) => {
       // Allure
       await allure.epic('Product Page');
@@ -102,13 +105,14 @@ test.describe('Product Page', () => {
       await productPage.addToCart();
 
       // Assert
-      await productPage.toast.assertSuccessMessage('Product added to shopping cart');
-      //await productPage.nav.assertCartIsVisible();
+      await productPage.toast.assertProductAddedToCart();
+      await cartPage.assertCartItemCount(1);
     });
 
     test('should add product to cart with custom quantity @regression', async ({
       homePage,
       productPage,
+      cartPage,
     }) => {
       // Allure
       await allure.epic('Product Page');
@@ -123,7 +127,8 @@ test.describe('Product Page', () => {
       await productPage.addToCartWithQuantity(3);
 
       // Assert
-      await productPage.toast.assertSuccessMessage('Product added to shopping cart');
+      await productPage.toast.assertProductAddedToCart();
+      await cartPage.assertCartItemCount(3);
     });
   });
 

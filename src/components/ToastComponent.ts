@@ -52,14 +52,14 @@ export class ToastComponent {
   }
 
   async assertProductDeleted(): Promise<void> {
-    await this.assertSuccessMessage('Product deleted');
+    await this.assertSuccessMessage('toasts.product-deleted');
   }
 
   async assertQuantityUpdated(): Promise<void> {
-    await this.assertSuccessMessage('Product quantity updated');
+    await this.assertSuccessMessage('toasts.product-quantity-updated');
   }
 
   async assertProductAddedToCart(): Promise<void> {
-    await this.assertSuccessMessage('Product added to shopping cart');
+    await this.assertSuccessMessage('toasts.product-added-to-cart');
   }
 }

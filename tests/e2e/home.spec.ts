@@ -42,7 +42,7 @@ test.describe('Home Page', () => {
       await allure.severity('critical');
 
       // Arrange
-      const searchTerm = 'hammer';
+      const searchTerm = 'Saw';
 
       // Act
       await homePage.navigate();
