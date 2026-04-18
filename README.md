@@ -22,6 +22,7 @@ Built as a portfolio project to demonstrate professional QA engineering skills �
 - [Framework Architecture](#-framework-architecture)
 - [CI/CD Pipeline](#-cicd-pipeline)
 - [Reporting](#-reporting)
+- [Test Reports](#-test-reports)
 - [CI Notes](#-ci-notes)
 
 ---
@@ -43,51 +44,62 @@ Built as a portfolio project to demonstrate professional QA engineering skills �
 
 ## 📁 Project Structure
 
+```
 playwright-toolshop-framework/
 ├── .github/
-│ └── workflows/
-│ └── playwright.yml              # CI/CD pipeline
+│   └── workflows/
+│       └── playwright.yml          # CI/CD pipeline
 ├── config/
-│ └── environments/
-│ ├── dev.env                     # Dev credentials (gitignored)
-│ ├── staging.env                 # Staging credentials (gitignored)
-│ └── prod.env                    # Prod credentials (gitignored)
+│   └── environments/
+│       ├── dev.env                 # Dev credentials (gitignored)
+│       ├── staging.env             # Staging credentials (gitignored)
+│       └── prod.env                # Prod credentials (gitignored)
+├── docs/
+│   └── screenshots/                # Test report screenshots
+│       ├── allure-dashboard.png
+│       ├── allure-behaviors.png
+│       ├── allure-graphs.png
+│       ├── playwright-report.png
+│       ├── playwright-list.png
+│       └── test-results-terminal.png
 ├── src/
-│ ├── api/ # API client layer
-│ │ ├── BaseApiClient.ts          # Abstract HTTP client
-│ │ ├── AuthApiClient.ts          # Authentication API
-│ │ ├── index.ts                  # Central export file
-│ │ └── ProductsApiClient.ts      # Products API
-│ ├── components/                 # Reusable UI components
-│ │ ├── NavigationComponent.ts    # Navbar component
-│ │ └── ToastComponent.ts         # Toast notification component
+│   ├── api/                        # API client layer
+│ │ ├── BaseApiClient.ts            # Abstract HTTP client
+│ │ ├── AuthApiClient.ts            # Authentication API
+│ │ ├── index.ts                    # Central export file
+│ │ └── ProductsApiClient.ts        # Products API
+│ ├── components/                   # Reusable UI components
+│ │   ├── NavigationComponent.ts    # Navbar component
+│ │   └── ToastComponent.ts         # Toast notification component
 │ ├── fixtures/
-│ │ └── index.ts                  # Custom Playwright fixtures
-│ ├── pages/                      # Page Object Models
-│ │ ├── BasePage.ts               # Abstract base page
-│ │ ├── LoginPage.ts              # Login page
-│ │ ├── HomePage.ts               # Home/product listing page
-│ │ ├── ProductPage.ts            # Product detail page
-│ │ └── CartPage.ts               # Shopping cart page
-│ └── types/                      # TypeScript interfaces
-│ ├── Auth.ts                     # Auth types
-│ ├── Product.ts                  # Product types
-│ ├── index.ts                    # Central export file
-│ └── User.ts                     # User types
+│ │   └── index.ts                  # Custom Playwright fixtures
+│ ├── pages/                        # Page Object Models
+│ │   ├── BasePage.ts               # Abstract base page
+│ │   ├── LoginPage.ts              # Login page
+│ │   ├── HomePage.ts               # Home/product listing page
+│ │   ├── ProductPage.ts            # Product detail page
+│ │   └── CartPage.ts               # Shopping cart page
+│ └── types/                        # TypeScript interfaces
+│     ├── Auth.ts                   # Auth types
+│     ├── Product.ts                # Product types
+│     ├── index.ts                  # Central export file
+│     └── User.ts                   # User types
 ├── test-data/
-│ └── static/                     # Static test data
+│   └── static/                     # Static test data
 ├── tests/
-│ ├── api/
-│ │ └── products.spec.ts          # API tests
+│   ├── api/
+│ │ └── products.spec.ts             # API tests
 │ ├── e2e/
-│ │ ├── auth.spec.ts              # Authentication tests
-│ │ ├── cart.spec.ts              # Cart management tests
-│ │ ├── home.spec.ts              # Home page tests
-│ │ └── product.spec.ts           # Product detail tests
-│ └── global.setup.ts             # Authentication state setup
-├── .env.example                  # Environment variable template
-├── playwright.config.ts          # Playwright configuration
-└── tsconfig.json                 # TypeScript configuration
+│ │   ├── auth.spec.ts               # Authentication tests
+│ │   ├── cart.spec.ts               # Cart management tests
+│ │   ├── home.spec.ts               # Home page tests
+│ │   └── product.spec.ts            # Product detail tests
+│ └── global.setup.ts                # Authentication state setup
+├── .env.example                     # Environment variable template
+├── playwright.config.ts             # Playwright configuration
+└── tsconfig.json                    # TypeScript configuration
+
+```
 
 ---
 
@@ -300,20 +312,22 @@ product.xyz; // ❌ TypeScript error — doesn't exist
 
 ### Pipeline Overview
 
+```
 Push / PR to master
-↓
+         ↓
 ┌─────────────────────┐
-│ Smoke Tests Job     │ ← Runs on every push and PR
-│ API @smoke tests    │ ← Must pass
-│ UI @smoke tests     │ ← Best-effort (Cloudflare)
+│   Smoke Tests Job   │  ← Runs on every push and PR
+│   API @smoke tests  │  ← Must pass
+│   UI @smoke tests   │  ← Best-effort (Cloudflare)
 └─────────────────────┘
-↓ (master push only)
+         ↓ (master push only)
 ┌─────────────────────┐
-│ Regression Tests Job│ ← Runs on merge to master
-│ All API tests       │ ← Must pass
-│ All UI tests        │ ← Best-effort (Cloudflare)
-│ Allure report       │ ← Uploaded as artifact
+│ Regression Tests Job│  ← Runs on merge to master
+│   All API tests     │  ← Must pass
+│   All UI tests      │  ← Best-effort (Cloudflare)
+│   Allure report     │  ← Uploaded as artifact
 └─────────────────────┘
+```
 
 ### Scheduled Runs
 
@@ -353,6 +367,24 @@ Professional interactive report with:
 - Owner attribution
 - Step-by-step execution timeline
 - Screenshots and traces embedded
+
+---
+
+## 📸 Test Reports
+
+### Allure Report
+![Allure Dashboard](docs/screenshots/allure-dashboard.png)
+![Allure Behaviors](docs/screenshots/allure-behaviors.png)
+![Allure Graphs](docs/screenshots/allure-graphs.png)
+
+### Playwright HTML Report  
+![Playwright HTML Report](docs/screenshots/playwright-report.png)
+
+### Playwright List Report  
+![Playwright List Report](docs/screenshots/playwright-list.png)
+
+### Test Run Terminal Output
+![Terminal Output](docs/screenshots/test-results-terminal.png)
 
 ---
 
