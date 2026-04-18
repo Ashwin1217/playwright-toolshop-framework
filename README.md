@@ -19,11 +19,11 @@ Built as a portfolio project to demonstrate professional QA engineering skills �
 - [Getting Started](#-getting-started)
 - [Running Tests](#-running-tests)
 - [Test Coverage](#-test-coverage)
-- [Framework Architecture](#-framework-architecture)
+- [Framework Architecture](#️-framework-architecture)
 - [CI/CD Pipeline](#-cicd-pipeline)
 - [Reporting](#-reporting)
 - [Test Reports](#-test-reports)
-- [CI Notes](#-ci-notes)
+- [CI Notes](#️-ci-notes)
 
 ---
 
