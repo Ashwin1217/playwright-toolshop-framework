@@ -28,7 +28,7 @@ export class CartPage extends BasePage {
       hasText: 'Cart',
     });
     this.emptyCartMessage = page.locator('p.ng-star-inserted', {
-      hasText: 'The cart is empty',
+      hasText: 'The cart is empty. Nothing to display.',
     });
   }
 

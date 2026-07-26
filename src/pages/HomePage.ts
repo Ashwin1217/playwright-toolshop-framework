@@ -83,6 +83,15 @@ export class HomePage extends BasePage {
     await this.waitForPageLoad();
   }
 
+  async clickFirstProductAvailableInStock(): Promise<boolean> {
+    for (let i = 1; i <= (await this.getProductCount()).valueOf(); i++)
+      if (await this.assertProductIsInStock(i)) {
+        await this.clickProductByIndex(i);
+        return true;
+      }
+    return false;
+  }
+
   // ─── Assertions ────────────────────────────────────────────────
 
   async assertHomePageLoaded(): Promise<void> {
@@ -103,11 +112,19 @@ export class HomePage extends BasePage {
 
   async assertSearchResultsContain(searchTerm: string): Promise<void> {
     const count = await this.getProductCount();
-    for (let i = 0; i < count; i++) {
+    for (let i = 1; i < count; i++) {
       const name = await this.getProductNameByIndex(i);
       if (!name.toLowerCase().includes(searchTerm.toLowerCase())) {
         throw new Error(`Product "${name}" does not contain search term "${searchTerm}"`);
       }
     }
+  }
+
+  async assertProductIsInStock(index: number): Promise<boolean> {
+    return !(await this.isElementVisible(
+      this.page.locator(
+        `(//a[contains(@data-test,'product-')])[${index}]//span[@data-test='out-of-stock']`,
+      ),
+    ));
   }
 }

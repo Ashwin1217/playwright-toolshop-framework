@@ -78,7 +78,7 @@ test.describe('Cart Page', () => {
 
       // Arrange
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.addToCart();
       await productPage.toast.assertProductAddedToCart();
 
@@ -133,7 +133,7 @@ test.describe('Cart Page', () => {
 
       // Arrange
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.addToCart();
       await productPage.toast.assertProductAddedToCart();
       await cartPage.navigate();
@@ -159,7 +159,7 @@ test.describe('Cart Page', () => {
 
       // Arrange
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.addToCart();
       await productPage.toast.assertProductAddedToCart();
       await cartPage.navigate();
@@ -192,7 +192,7 @@ test.describe('Cart Page', () => {
 
       // Arrange
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.addToCart();
       await productPage.toast.assertProductAddedToCart();
       await cartPage.navigate();

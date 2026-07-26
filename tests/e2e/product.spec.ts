@@ -73,7 +73,7 @@ test.describe('Product Page', () => {
 
       // Act
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.assertProductPageLoaded();
       await productPage.addToCart();
 
@@ -95,7 +95,7 @@ test.describe('Product Page', () => {
 
       // Act
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.assertProductPageLoaded();
 
       // Assert default quantity is 1
@@ -122,7 +122,7 @@ test.describe('Product Page', () => {
 
       // Act
       await homePage.navigate();
-      await homePage.clickProductByIndex(0);
+      expect(await homePage.clickFirstProductAvailableInStock()).toBeTruthy();
       await productPage.assertProductPageLoaded();
       await productPage.addToCartWithQuantity(3);
 
