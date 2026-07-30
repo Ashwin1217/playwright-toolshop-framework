@@ -1,5 +1,4 @@
-import { test, expect } from '../../src/fixtures/index';
-import * as allure from 'allure-js-commons';
+import { test, expect, allure } from '../../src/fixtures/index';
 
 test.describe('Home Page', () => {
   test.describe('Page Load', () => {

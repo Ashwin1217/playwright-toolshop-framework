@@ -7,6 +7,7 @@ import { NavigationComponent } from '../components/NavigationComponent';
 import { ToastComponent } from '../components/ToastComponent';
 import { AuthApiClient } from '../api/AuthApiClient';
 import { ProductsApiClient } from '../api/ProductsApiClient';
+import * as allure from 'allure-js-commons';
 
 // ─── Define fixture types ──────────────────────────────────────────
 
@@ -64,3 +65,4 @@ export const test = base.extend<PageFixtures & ApiFixtures>({
 
 // Re-export expect so tests only need one import
 export { expect };
+export { allure };

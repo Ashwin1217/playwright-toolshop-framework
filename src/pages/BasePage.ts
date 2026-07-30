@@ -28,18 +28,18 @@ export abstract class BasePage {
   // ─── Element Interactions ──────────────────────────────────────
 
   async clickElement(locator: Locator): Promise<void> {
-    await locator.waitFor({ state: 'visible' });
+    await this.waitForVisible(locator);
     await locator.click();
   }
 
   async fillInput(locator: Locator, value: string): Promise<void> {
-    await locator.waitFor({ state: 'visible' });
+    await this.waitForVisible(locator);
     await locator.clear();
     await locator.fill(value);
   }
 
   async getElementText(locator: Locator): Promise<string> {
-    await locator.waitFor({ state: 'visible' });
+    await this.waitForVisible(locator);
     return locator.innerText();
   }
 

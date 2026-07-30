@@ -1,5 +1,4 @@
-import { test } from '../../src/fixtures/index';
-import * as allure from 'allure-js-commons';
+import { test, allure } from '../../src/fixtures/index';
 
 test.describe('Authentication', () => {
   // Override storageState — auth tests must start logged out

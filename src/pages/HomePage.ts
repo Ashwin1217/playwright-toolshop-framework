@@ -84,7 +84,8 @@ export class HomePage extends BasePage {
   }
 
   async clickFirstProductAvailableInStock(): Promise<boolean> {
-    for (let i = 1; i <= (await this.getProductCount()).valueOf(); i++)
+    const productCount = await this.getProductCount();
+    for (let i = 1; i <= productCount; i++)
       if (await this.assertProductIsInStock(i)) {
         await this.clickProductByIndex(i);
         return true;
