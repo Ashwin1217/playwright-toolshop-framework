@@ -85,7 +85,7 @@ export class HomePage extends BasePage {
 
   async clickFirstProductAvailableInStock(): Promise<boolean> {
     const productCount = await this.getProductCount();
-    for (let i = 1; i <= productCount; i++)
+    for (let i = 0; i <= productCount; i++)
       if (await this.assertProductIsInStock(i)) {
         await this.clickProductByIndex(i);
         return true;
@@ -122,10 +122,7 @@ export class HomePage extends BasePage {
   }
 
   async assertProductIsInStock(index: number): Promise<boolean> {
-    return !(await this.isElementVisible(
-      this.page.locator(
-        `(//a[contains(@data-test,'product-')])[${index}]//span[@data-test='out-of-stock']`,
-      ),
-    ));
+    const product = await this.getProductCardByIndex(index);
+    return !(await product.locator('[data-test="out-of-stock"]').isVisible());
   }
 }

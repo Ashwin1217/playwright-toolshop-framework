@@ -1,5 +1,4 @@
-import { Page, Locator } from '@playwright/test';
-import { expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class ToastComponent {
   private readonly page: Page;
